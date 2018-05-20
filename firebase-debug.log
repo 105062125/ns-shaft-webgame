@@ -1,0 +1,32 @@
+[debug] [2018-05-20T13:45:00.099Z] ----------------------------------------------------------------------
+[debug] [2018-05-20T13:45:00.102Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Kevin\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2018-05-20T13:45:00.102Z] CLI Version:   3.18.2
+[debug] [2018-05-20T13:45:00.102Z] Platform:      win32
+[debug] [2018-05-20T13:45:00.102Z] Node Version:  v8.11.1
+[debug] [2018-05-20T13:45:00.103Z] Time:          Sun May 20 2018 21:45:00 GMT+0800 (台北標準時間)
+[debug] [2018-05-20T13:45:00.103Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-05-20T13:45:00.115Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-05-20T13:45:00.115Z] > authorizing via signed-in user
+[debug] [2018-05-20T13:45:00.117Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/assignment2-65f0e  
+  
+ Sun May 20 2018 21:45:00 GMT+0800 (台北標準時間)
+[debug] [2018-05-20T13:45:01.653Z] <<< HTTP RESPONSE 200
+[debug] [2018-05-20T13:45:01.654Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/assignment2-65f0e/tokens  
+  
+ Sun May 20 2018 21:45:01 GMT+0800 (台北標準時間)
+[debug] [2018-05-20T13:45:02.646Z] <<< HTTP RESPONSE 200
+[debug] [2018-05-20T13:45:02.647Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/assignment2-65f0e  
+  
+ Sun May 20 2018 21:45:02 GMT+0800 (台北標準時間)
+[debug] [2018-05-20T13:45:03.721Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\Kevin\Assignment_02'...
+[info] 
+[debug] [2018-05-20T13:45:03.724Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/399941802549/clients/_:getWebAppConfig  
+  
+ Sun May 20 2018 21:45:03 GMT+0800 (台北標準時間)
+[debug] [2018-05-20T13:45:04.818Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] +  hosting: Local server: http://localhost:5000
+
