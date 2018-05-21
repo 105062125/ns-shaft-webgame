@@ -17,6 +17,7 @@ function initApp() {
         var password = txtPassword.value;
 
          firebase.auth().signInWithEmailAndPassword(email, password).then(function () {
+             console.log("errorrrrrr");
             window.location.replace('main.html');
         }).catch(function (error) {
             // Handle Errors here.

@@ -3,7 +3,16 @@ var player;
 var keyboard;
 
 var platforms = [];
+var highscore = [];
+var sortscore = [];
+var nameboard = [];
+var timeboard = [];
 
+var lastscore ;
+var scoreboardcount = 0;
+var temp=0;
+var temp2;
+var count = 0;
 var leftWall;
 var rightWall;
 var leftWalldown;
@@ -340,6 +349,7 @@ var database = firebase.database().ref();
 function writedata(){
     var user = firebase.auth().currentUser;
     var date = new Date();
+    var username;
       var h = date.getHours();
       var m = date.getMinutes();
       var s = date.getSeconds();
@@ -353,12 +363,55 @@ function writedata(){
         s = '0' + s;
       }
       var now = h+':'+m+':'+s;
-    var postData = {
-        email:user.email,
-        score: distance,
-        time: now
-      };
-    firebase.database().ref().push(postData);
+
+    if(distance > lastscore)
+    {
+        if(user.displayName == null)
+        {
+            username = prompt("遊戲名字", "");
+            
+            if(username)
+            {
+                user.updateProfile({
+                    displayName:username,
+                });
+                var postData = {
+                    name:username,
+                    score: distance,
+                    time: now
+                };
+                firebase.database().ref().push(postData);
+            }
+        }
+        else
+        {
+            var postData = {
+                name:user.displayName,
+                score: distance,
+                time: now
+            };
+            firebase.database().ref().push(postData);
+        }
+        var $show = $('#show');
+        $show.html('');
+        firebase.database().ref().once('value', function(snapshot) {
+            count = 0;
+            scoreboardcount = 0
+        for(var i in snapshot.val()){
+            highscore[count] = snapshot.val()[i].score;
+            timeboard[count] = snapshot.val()[i].time;
+            nameboard[count++] = snapshot.val()[i].name;
+            scoreboardcount = scoreboardcount + 1 ;
+        }
+        bubble();
+        lastscore = highscore[scoreboardcount-1]
+        console.log(lastscore);
+        ranking();
+        });
+    }
+    
+
+    
 }
 
 /// -----------------------------------------------------------------------------///以上main
@@ -453,15 +506,95 @@ game.state.add('mainstate', game.MyState.mainstate);
 game.state.add('startstate',game.MyState.startstate);
 game.state.start('startstate'); 
 
-/*$(function(){
+$(function(){
     
     var $show = $('#show');
     firebase.database().ref().once('value', function(snapshot) {
-      $show.html('');
+        count = 0;
+        scoreboardcount = 0
       for(var i in snapshot.val()){
-         $show.append('<div><div class="email">'+snapshot.val()[i].email+'</div><div class="score">'+snapshot.val()[i].score+' </div><div class="time">'+snapshot.val()[i].time+'</div>');
+         highscore[count] = snapshot.val()[i].score;
+         timeboard[count] = snapshot.val()[i].time;
+         nameboard[count++] = snapshot.val()[i].name;
+         scoreboardcount = scoreboardcount + 1 ;
       }
-      $show.scrollTop($show[0].scrollHeight);
+      bubble();
+      lastscore = highscore[scoreboardcount-1]
+      console.log(lastscore);
+      ranking();
     });
+
+    /*firebase.database().ref().once('value', function(snapshot) {
+        $show.html('');
+        for(var i in snapshot.val()){
+           $show.append('<div><div class="name">'+snapshot.val()[i].name+'</div><div class="score">'+snapshot.val()[i].score+' </div><div class="time">'+snapshot.val()[i].time+'</div>');
+           highscore[i] = snapshot.val()[i].score;
+           scoreboardcount = scoreboardcount + 1 ;
+           console.log(highscore[i]);
+        }
+        $show.scrollTop($show[0].scrollHeight);
+        console.log(scoreboardcount);
+      });*/
+
+    /*firebase.database().ref().limitToLast(1).on('value', function(snapshot) {
+        for(var i in snapshot.val()){
+            $show.append('<div><div class="name">'+snapshot.val()[i].name+'</div><div class="score">'+snapshot.val()[i].score+' </div><div class="time">'+snapshot.val()[i].time+'</div>');
+        }
+        $show.scrollTop($show[0].scrollHeight);
+
+      });*/
+
+  });
   
-  });*/
+
+  //大排到小
+  function bubble (){
+      for(var j=scoreboardcount-1;j>=1;j--)
+      {
+          for(var i = 0;i<scoreboardcount-1;i++)
+          {
+             if(highscore[i] < highscore[i+1])
+             {
+                temp = highscore[i];
+                highscore[i] = highscore[i+1];
+                highscore[i+1] = temp;
+
+                temp2 = nameboard[i];
+                nameboard[i] = nameboard[i+1];
+                nameboard[i+1] = temp2;
+
+                temp2 = timeboard[i];
+                timeboard[i] = timeboard[i+1];
+                timeboard[i+1] = temp2;
+             }
+          }
+      }
+      /*console.log(highscore[0]);
+      console.log(highscore[1]);
+      console.log(highscore[2]);
+      console.log(highscore[3]);
+      console.log(highscore[4]);
+
+      console.log(nameboard[0]);
+      console.log(nameboard[1]);
+      console.log(nameboard[2]);
+      console.log(nameboard[3]);
+      console.log(nameboard[4]);*/
+  }
+
+
+  function ranking(){
+    var $show = $('#show');
+    $show.append('<div><div class="rank">'+'遊戲排行榜'+'</div>');
+    $show.append('<div><div class="rankno">'+'---------------------------------------------------------------------------------------------------------------------------------------------'+'</div>');
+    for(var i=0 ;i<5;i++){
+        if(i<4)
+        {
+            $show.append('<div><div class="name">'+'遊戲名稱 :'+nameboard[i]+'</div><div class="score">'+'抵達層數 :'+highscore[i]+' </div><div class="time">'+'遊玩時間 :'+timeboard[i]+' </div><div class="no">'+'--------------------------------'+'</div>');
+        }
+        else
+        $show.append('<div><div class="name">'+'遊戲名稱 :'+nameboard[i]+'</div><div class="score">'+'抵達層數 :'+highscore[i]+' </div><div class="time">'+'遊玩時間 :'+timeboard[i]+'</div>');
+    }
+    $show.append('<div><div class="rankno">'+'---------------------------------------------------------------------------------------------------------------------------------------------'+'</div>');
+    $show.scrollTop($show[0].scrollHeight);
+  }
