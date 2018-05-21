@@ -350,9 +350,17 @@ function writedata(){
     var user = firebase.auth().currentUser;
     var date = new Date();
     var username;
+      var M = date.getMonth()+1;
+      var d = date.getDate();
       var h = date.getHours();
       var m = date.getMinutes();
       var s = date.getSeconds();
+      if(M<10){
+        M = '0'+M;
+      }
+      if(d<10){
+        d = '0'+d;
+      }
       if(h<10){
         h = '0'+h;
       }
@@ -362,7 +370,7 @@ function writedata(){
       if(s<10){
         s = '0' + s;
       }
-      var now = h+':'+m+':'+s;
+      var now = M+'/'+d+'-'+h+':'+m+':'+s;
 
     if(distance > lastscore)
     {
@@ -587,6 +595,10 @@ $(function(){
     var $show = $('#show');
     $show.append('<div><div class="rank">'+'遊戲排行榜'+'</div>');
     $show.append('<div><div class="rankno">'+'---------------------------------------------------------------------------------------------------------------------------------------------'+'</div>');
+    $show.append('<div><div class="rank2">'+'2'+'</div>');
+    $show.append('<div><div class="rank3">'+'3'+'</div>');
+    $show.append('<div><div class="rank4">'+'4'+'</div>');
+    $show.append('<div><div class="rank5">'+'5'+'</div>');
     for(var i=0 ;i<5;i++){
         if(i<4)
         {

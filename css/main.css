@@ -178,7 +178,8 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: #ebeeef;
+  /*background: #ebeeef;*/
+  /*background-image:url('startback.jpg');*/
 }
 
 

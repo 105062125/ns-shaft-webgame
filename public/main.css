@@ -75,13 +75,10 @@ body {
 	overflow: hidden;
 }
 
-#first {
+#firstpic {
 	position: absolute;
-	top:150px;
-	left: 820px;
-	font-size: 40px;
-	color: rgb(255, 255, 255);
-	font-weight: bold;
+	left: 810px;
+	top:175px;
 }
 
 .rank {
@@ -91,17 +88,49 @@ body {
 }
 .name {
 	position: relative;
-	left: 50px;
+	left: 90px;
 }
 .score {
 	position: relative;
-	left: 50px;
+	left: 90px;
 }
 .time {
 	position: relative;
-	left: 50px;
+	left: 90px;
 }
 .no {
 	position: relative;
-	left: 50px;
+	left: 90px;
+}
+.rank2 {
+	position: absolute;
+	left: 35px;
+	top:160px;
+	font-size: 40px;
+	color: #ededed;
+	font-weight: bold;
+}
+.rank3 {
+	position: absolute;
+	left: 35px;
+	top:240px;
+	font-size: 40px;
+	color: #ededed;
+	font-weight: bold;
+}
+.rank4 {
+	position: absolute;
+	left: 35px;
+	top:310px;
+	font-size: 40px;
+	color: #ededed;
+	font-weight: bold;
+}
+.rank5 {
+	position: absolute;
+	left: 35px;
+	top:390px;
+	font-size: 40px;
+	color: #ededed;
+	font-weight: bold;
 }
