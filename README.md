@@ -49,4 +49,4 @@
 6. Store player's name and score in firebase real-time database, and add a leaderboard to your game | YES |
 7. Appearance (登入介面美化，背景畫面，排行榜美化等等)
 8. other creative features :
-    單人模式(可列入排行)、雙人模式
+    單人模式(可列入排行)、雙人模式、登入登出功能
